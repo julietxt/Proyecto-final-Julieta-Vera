@@ -10,7 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 def index(request):
-    return render(request, "VentaTec/index.html")
+    return render(request, "VentaLibre/index.html")
 
 
 class ArticuloList(ListView):
