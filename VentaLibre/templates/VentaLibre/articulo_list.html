@@ -5,23 +5,29 @@
 
 
 {%block vistas %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
 <div class="col">
   {% for articulo in articulos %}
     <div class="card shadow-sm">
-      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+    <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="{{articulo.image_url}}" data-holder-rendered="true">
       <div class="card-body">
-        <p class="card-text">hello.</p>
+        <p class="card-text">{{articulo.descripcion}}</p>
         <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
-          </div>
-          <small class="text-muted">9 mins</small>
+          
+             {% if user.is_authenticated and user.id == articulo.propietario.id  %}
+                    <a href="{% url 'articulo-delete' articulo.id %}" type= "button" class="btn btn-sm btn-outline-secondary">Borrar</a>
+                    <a href="{% url 'articulo-update' articulo.id %}" type="button" class="btn btn-sm btn-outline-secondary">Actualizar</a>
+                 {% endif %}
+                 </div>
+                 <small class="text-muted">${{ articulo.precio }}</small>
+         
+            </div>
+            </div>
         </div>
-      </div>
-    </div>
-  {% endfor %}
+        </div>
+    {% endfor %}
   </div>
 
-{%endblock%}
+{% endblock %}

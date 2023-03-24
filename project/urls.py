@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from VentaLibre.views import index, ArticuloList, ArticuloMineList
+from VentaLibre.views import (index, ArticuloList, ArticuloMineList,ArticuloUpdate, ArticuloDelete, ArticuloCreate, Login, Logout, SignUp)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,6 +25,14 @@ urlpatterns = [
     path('', index, name="index"),
     path('articulo/list', ArticuloList.as_view(), name="articulo-list"),
     path('articulo/list', ArticuloMineList.as_view(), name="articulo-mine"),
+    path('articulo/<pk>/update', ArticuloUpdate.as_view(), name="articulo-update"),
+    path('articulo/<pk>/delete', ArticuloDelete.as_view(), name="articulo-delete"),
+    path('articulo/create', ArticuloCreate.as_view(), name="articulo-create"),
+    path('login/', Login.as_view(), name="login"),
+    path('logout/', Logout.as_view(), name="logout"),
+    path('signup/', SignUp.as_view(), name="signup"),
     
     
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
