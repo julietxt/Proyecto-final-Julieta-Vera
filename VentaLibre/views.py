@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.shortcuts import render
 from VentaLibre.models import Articulo
-#from VentasTec.forms import PostForm
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -30,14 +29,12 @@ class ArticuloDetail(DetailView):
 class ArticuloUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Articulo
     success_url = reverse_lazy("articulo-list")
-    fields = (
-        
-        )
+    fields = '__all__'
 
     def test_func(self):
         user_id = self.request.user.id
-        post_id = self.kwargs.get("pk")
-        return Articulo.objects.filter(publisher=user_id,id=post_id).exists()
+        articulo_id = self.kwargs.get("pk")
+        return Articulo.objects.filter(propietario=user_id,id=articulo_id).exists()
 
 
 class ArticuloDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -47,15 +44,14 @@ class ArticuloDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         user_id = self.request.user.id
-        post_id = self.kwargs.get("pk")
-        return Articulo.objects.filter(propietario=user_id,id=post_id).exists()
+        articulo_id = self.kwargs.get("pk")
+        return Articulo.objects.filter(propietario=user_id,id=articulo_id).exists()
 
 
 class ArticuloCreate(LoginRequiredMixin, CreateView):
     model = Articulo
     success_url = reverse_lazy("articulo-list")
-    fields = (
-    )
+    fields = '__all__'
 
     def form_valid(self, form):
         form.instance.propietario = self.request.user
@@ -77,7 +73,7 @@ class Login(LoginView):
 
 class SignUp(CreateView):
     form_class = UserCreationForm
-    template_name = 'registration/signup.html'
+    template_name = 'registration/sign_up.html'
     success_url = reverse_lazy('articulo-list')
 
 

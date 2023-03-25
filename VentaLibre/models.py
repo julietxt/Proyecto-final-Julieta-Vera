@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 
 class Articulo(models.Model):
     titulo = models.CharField(max_length=100)
-    articulo = models.TextField(max_length=100)
-    marca = models.TextField(max_length=100)
-    descripcion = models.TextField(max_length=1000)
+    articulo = models.TextField(max_length=40)
+    marca = models.TextField(max_length=40)
+    descripcion = models.TextField(max_length=500)
     precio = models.FloatField()
     imagen = models.ImageField(upload_to="menues", null=True, blank=True)
     propietario = models.ForeignKey(to=User, on_delete=models.CASCADE , related_name="propietario" )
