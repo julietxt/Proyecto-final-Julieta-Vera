@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from VentaLibre.views import (index, ArticuloList, ArticuloMineList,ArticuloUpdate, ArticuloDelete, ArticuloCreate, Login, Logout, SignUp)
+from VentaLibre.views import (index, ArticuloList, ArticuloMineList,ArticuloUpdate, ArticuloDelete,
+    ArticuloCreate, Login, Logout, SignUp, ProfileCreate, ProfileUpdate)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,13 +25,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('articulo/list', ArticuloList.as_view(), name="articulo-list"),
-    path('articulo/list', ArticuloMineList.as_view(), name="articulo-mine"),
+    path('articulo/list/mine', ArticuloMineList.as_view(), name="articulo-mine"),
     path('articulo/<pk>/update', ArticuloUpdate.as_view(), name="articulo-update"),
     path('articulo/<pk>/delete', ArticuloDelete.as_view(), name="articulo-delete"),
     path('articulo/create', ArticuloCreate.as_view(), name="articulo-create"),
     path('login/', Login.as_view(), name="login"),
     path('logout/', Logout.as_view(), name="logout"),
     path('signup/', SignUp.as_view(), name="signup"),
+    path('profile/create', ProfileCreate.as_view(), name="profile-create" ),
+    path('profile/<pk>/update', ProfileUpdate.as_view(), name="profile-update" ),
     
     
 ]

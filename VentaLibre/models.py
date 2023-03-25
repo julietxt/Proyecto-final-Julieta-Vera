@@ -17,4 +17,14 @@ class Articulo(models.Model):
     
     def __str__(self):
         return f"{self.id} - {self.titulo} - {self.propietario.id}"
+    
+    
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    avatar = models.ImageField(upload_to="avatares", null=True, blank=True)
+
+    @property
+    def avatar_url(self):
+        return self.avatar.url if self.avatar else ''
 
