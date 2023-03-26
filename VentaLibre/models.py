@@ -27,4 +27,11 @@ class Profile(models.Model):
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else ''
+    
+    
+class Mensaje(models.Model):
+    mensaje = models.TextField(max_length=1000)
+    email = models.EmailField()
+    creado_el = models.DateTimeField(auto_now_add=True) 
+    destinatario = models.ForeignKey(User, on_delete=models.CASCADE, related_name="mensajes")
 

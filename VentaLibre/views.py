@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.shortcuts import render
-from VentaLibre.models import Articulo, Profile
+from VentaLibre.models import Articulo, Profile, Mensaje
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -10,6 +10,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 def index(request):
     return render(request, "VentaLibre/index.html")
+
+def about(request):
+    return render(request, "VentaLibre/about.html")
 
 
 class ArticuloList(ListView):
@@ -97,3 +100,26 @@ class ProfileUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         return Profile.objects.filter(user=self.request.user).exists()
+    
+class MensajeCreate(CreateView):
+    model = Mensaje
+    success_url = reverse_lazy('mensaje-create')
+    fields = '__all__'
+
+
+class MensajeDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Mensaje
+    context_object_name = "mensaje"
+    success_url = reverse_lazy("mensaje-list")
+
+    def test_func(self):
+        return Mensaje.objects.filter(destinatario=self.request.user).exists()
+    
+
+class MensajeList(LoginRequiredMixin, ListView):
+    model = Mensaje
+    context_object_name = "mensajes"
+
+    def get_queryset(self):
+        import pdb; pdb.set_trace
+        return Mensaje.objects.filter(destinatario=self.request.user).all()

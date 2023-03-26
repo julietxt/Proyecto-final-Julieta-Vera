@@ -8,11 +8,15 @@
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
 <div class="col">
+  {% if not articulos%}
+  <h1> No hay articulos disponibles</h1>
+  {%endif%}
+  
   {% for articulo in articulos %}
     <div class="card shadow-sm">
     <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="{{articulo.image_url}}" data-holder-rendered="true">
       <div class="card-body">
-        <p class="card-text">{{articulo.descripcion}}</p>
+        <p class="card-text"> {{articulo.titulo}}-{{articulo.descripcion}}</p>
         <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">
           

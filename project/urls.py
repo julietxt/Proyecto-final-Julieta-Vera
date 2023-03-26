@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from VentaLibre.views import (index, ArticuloList, ArticuloMineList,ArticuloUpdate, ArticuloDelete,
-    ArticuloCreate, Login, Logout, SignUp, ProfileCreate, ProfileUpdate)
+    ArticuloCreate, ArticuloSearch, Login, Logout, SignUp, about, ProfileCreate, ProfileUpdate, MensajeCreate, MensajeDelete, MensajeList)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin/', admin.site.urls),
     path('', index, name="index"),
+    path('about', about, name="about"),
     path('articulo/list', ArticuloList.as_view(), name="articulo-list"),
     path('articulo/list/mine', ArticuloMineList.as_view(), name="articulo-mine"),
     path('articulo/<pk>/update', ArticuloUpdate.as_view(), name="articulo-update"),
@@ -34,6 +35,12 @@ urlpatterns = [
     path('signup/', SignUp.as_view(), name="signup"),
     path('profile/create', ProfileCreate.as_view(), name="profile-create" ),
     path('profile/<pk>/update', ProfileUpdate.as_view(), name="profile-update" ),
+    path('profile/create', ProfileCreate.as_view(), name="profile-create" ),
+    path('profile/<pk>/update', ProfileUpdate.as_view(), name="profile-update" ),
+    path('mensaje/list', MensajeList.as_view(), name="mensaje-list" ),
+    path('mensaje/create', MensajeCreate.as_view(), name="mensaje-create" ),
+    path('mensaje/<pk>/delete', MensajeDelete.as_view(), name="mensaje-delete"),
+    path('articulo/search',ArticuloSearch.as_view(), name="articulo-search"),
     
     
 ]
