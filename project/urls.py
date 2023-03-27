@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from VentaLibre.views import (index, ArticuloList, ArticuloMineList,ArticuloUpdate, ArticuloDelete,
-    ArticuloCreate, ArticuloSearch, Login, Logout, SignUp, about, ProfileCreate, ProfileUpdate, MensajeCreate, MensajeDelete, MensajeList)
+    ArticuloCreate, ArticuloDetail, ArticuloSearch, Login, Logout, SignUp, about, ProfileCreate, ProfileUpdate, MensajeCreate, MensajeDelete, MensajeList)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('about', about, name="about"),
     path('articulo/list', ArticuloList.as_view(), name="articulo-list"),
     path('articulo/list/mine', ArticuloMineList.as_view(), name="articulo-mine"),
+    path('articulo/<pk>/detail', ArticuloDetail.as_view(), name="articulo-detail"),
     path('articulo/<pk>/update', ArticuloUpdate.as_view(), name="articulo-update"),
     path('articulo/<pk>/delete', ArticuloDelete.as_view(), name="articulo-delete"),
     path('articulo/create', ArticuloCreate.as_view(), name="articulo-create"),

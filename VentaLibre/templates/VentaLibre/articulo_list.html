@@ -16,7 +16,8 @@
     <div class="card shadow-sm">
     <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="{{articulo.image_url}}" data-holder-rendered="true">
       <div class="card-body">
-        <p class="card-text"> {{articulo.titulo}}-{{articulo.descripcion}}</p>
+        <p class="card-text"> {{articulo.titulo}}</p>
+        <a href="{% url 'articulo-detail' articulo.id %}" type= "button" class="btn btn-sm btn-outline-secondary">Detalles</a>
         <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">
           
